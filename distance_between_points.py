@@ -1,7 +1,7 @@
 from os import system
 from math import sqrt
-import random
 from console_ui import *
+from correct_initialization import *
 
 
 # Задача №2
@@ -146,71 +146,6 @@ def ui_distance_between_points():
                 print_error_message('В меню всего 5 пунктов. Попробуйте еще раз.')
 
 
-def ui_array_of_dots_init(array_of_dots):
-    """
-    Функция реализующая пользовательский интерфейс в консоли для инициализации массива точек вручную.
-    :param array_of_dots: Массив точек для инициализации.
-    """
-    print('В каком пространстве будут находиться точки?\n'
-          '1. На прямой.\n'
-          '2. На плоскости.\n'
-          '3. В трехмерном пространстве.')
-
-    space_selection = input_correct_num(
-        left_value=-float('inf'),
-        right_value=float('inf'),
-        input_message='Выберите пункт меню: ',
-        error_message='В меню всего 3 пункта. Попробуйте еще раз.',
-        type_of_number=int
-    )
-    while True:
-        point_coordinates = []
-        for i in range(space_selection):
-            point_coordinates.append(
-                input_correct_num(
-                    left_value=-float('inf'),
-                    right_value=float('inf'),
-                    input_message=f"Введите {i + 1}-ю координату {len(array_of_dots) + 1}-й точки: ",
-                    error_message='Координата должна быть числом. Попробуйте еще раз.',
-                    type_of_number=float
-                )
-            )
-        array_of_dots.append(tuple(point_coordinates))
-        add_or_exit = input('Хотите добавить еще одну точку? Да / Нет: ')
-        add_or_exit = add_or_exit.upper()
-        while add_or_exit != 'ДА' and add_or_exit != 'НЕТ':
-            print_error_message('Есть только два варианта ответа. '
-                                'Попробуйте еще раз.')
-            add_or_exit = input('Хотите добавить еще одну точку? Да / Нет: ')
-            add_or_exit = add_or_exit.upper()
-
-        if add_or_exit == 'НЕТ':
-            return
-
-
-def ui_auto_array_of_dots_init(array_of_dots, space_selection):
-    """
-    Функция реализующая пользовательский интерфейс в консоли для автоматической инициализации массива точек.
-    :param array_of_dots: Массив точек для инициализации;
-    :param space_selection: размерность пространства в котором будут находиться точки.
-    """
-    size_of_array = input_correct_num(
-        left_value=1,
-        right_value=50,
-        input_message='Введите размер массива точек, который хотите заполнить автоматически: ',
-        error_message='Размер массива должен быть больше 0 и меньше или равен 50. '
-                      'Попробуйте еще раз.',
-        type_of_number=int
-    )
-
-    for i in range(size_of_array):
-        array_of_dots.append(
-            tuple(
-                round(random.random() * 10 * ((-1) ** random.randint(1, 2)), 1) for j in range(space_selection)
-            )
-        )
-
-
 def distance_between_points(first_array_of_dots, second_array_of_dots, distance):
     """
     Функция поиска точек расстояние между которыми больше заданного.
@@ -246,28 +181,3 @@ def print_error_message(message):
     print(message)
     system('PAUSE')
     system('CLS')
-
-
-def input_correct_num(left_value, right_value, input_message, error_message, type_of_number):
-    """
-    Функция реализующая ввод пользователем корректного числа входящего в заданный диапазон.
-    :param left_value: Левая граница диапазона;
-    :param right_value: правая граница диапазона;
-    :param input_message: сообщение-приглашение на ввод числа;
-    :param error_message: сообщение о том, что число не входит в диапазон и нужно ввести новое;
-    :param type_of_number: тип числа, которое нужно вводить пользователю.
-    :return: Возвращает корректное число введенное пользователем.
-    """
-    while True:
-        while True:
-            try:
-                num = type_of_number(input(input_message))
-                break
-            except ValueError:
-                print('Введенное значение должно являться числом! '
-                      'Попробуйте еще раз.')
-
-        if num < left_value or num > right_value:
-            print(error_message)
-        else:
-            return num

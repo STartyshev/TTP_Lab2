@@ -1,6 +1,7 @@
 from os import system
 from console_ui import *
 from correct_initialization import *
+from error_output import *
 
 
 # Задача №1
@@ -121,10 +122,3 @@ def number_of_common_numbers(first_array, second_array):
             num_of_common_numbers += 1
             list_of_common_numbers.append(elem)
     return num_of_common_numbers
-
-
-def print_error_message(message):
-    system('CLS')
-    print(message)
-    system('PAUSE')
-    system('CLS')

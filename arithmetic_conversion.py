@@ -2,6 +2,7 @@ from os import system
 import random
 from console_ui import *
 from correct_initialization import *
+from error_output import *
 
 
 # Задача №3
@@ -178,10 +179,3 @@ def arithmetic_operation(index, elem1, elem2, elem3, list_of_results, func, func
                                       f"{elem2} {function_symbol} {elem1} = {elem3};")
         else:
             list_of_results[index] += f"\n{elem2} {function_symbol} {elem1} = {elem3};"
-
-
-def print_error_message(message):
-    system('CLS')
-    print(message)
-    system('PAUSE')
-    system('CLS')

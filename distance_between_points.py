@@ -2,6 +2,7 @@ from os import system
 from math import sqrt
 from console_ui import *
 from correct_initialization import *
+from error_output import *
 
 
 # Задача №2
@@ -174,10 +175,3 @@ def segment_length(dot1, dot2):
             (c1 - c2) ** 2 for c1, c2 in zip(dot1, dot2)
         )
     )
-
-
-def print_error_message(message):
-    system('CLS')
-    print(message)
-    system('PAUSE')
-    system('CLS')

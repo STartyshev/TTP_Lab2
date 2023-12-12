@@ -114,11 +114,9 @@ def number_of_common_numbers(first_array, second_array):
     :param second_array: второй массив чисел.
     :return: Возвращает количество общих чисел двух массивов.
     """
-    num_of_common_numbers = 0
     list_of_common_numbers = []
     for elem in first_array:
         if ((str(elem) in list(map(str, second_array)) or str(elem)[::-1] in list(map(str, second_array))) and
                 elem not in list_of_common_numbers):
-            num_of_common_numbers += 1
             list_of_common_numbers.append(elem)
-    return num_of_common_numbers
+    return len(list_of_common_numbers)
